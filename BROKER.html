@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BROKER - Modern One-Page Website</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://via.placeholder.com/32" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      overflow-x: hidden;
+      transition: background 0.5s ease;
+    }
+
+    body.dark-mode {
+      background: linear-gradient(135deg, #1a1a1a, #333333);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .broker-text {
+      font-size: 32px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .broker-text i {
+      font-size: 28px;
+      color: #ffcc00;
+    }
+
+    .broker-text span {
+      display: inline-block;
+      animation: float-letter 2s infinite ease-in-out alternate;
+    }
+
+    @keyframes float-letter {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #ffcc00;
+    }
+    .menu-toggle {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Responsive Navigation */
+@media screen and (max-width: 768px) {
+  nav ul {
+    display: none; /* Hide menu initially */
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: white;
+    width: 100%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+
+  nav ul.show {
+    display: flex; /* Show when toggled */
+  }
+
+  .menu-toggle {
+    display: block; /* Show hamburger icon */
+  }
+}
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Toggle Switch with Sun & Moon */
+    .toggle-switch {
+      position: relative;
+      width: 60px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .toggle-switch::before {
+      content: "";
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      background: white;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.3s ease;
+    }
+    .toggle-switch.active::before {
+      transform: translateX(30px);
+    }
+    .toggle-switch .sun-icon,
+    .toggle-switch .moon-icon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: #ffcc00;
+    }
+    .toggle-switch .sun-icon {
+      left: 8px;
+    }
+    .toggle-switch .moon-icon {
+      right: 8px;
+    }
+
+    
+    /* General Section Styling */
+    section {
+      padding: 40px 20px;
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .glassmorphism {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 1200px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glassmorphism:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+    /* Home Section */
+    .home-section {
+      min-height: 100vh;
+      padding: 80px 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      background: url('im3.png') no-repeat center center/cover;
+
+    }
+    
+    .home-content {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 50px;
+      border-radius: 10px;
+    }
+    
+    .home-section h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    .home-section p {
+      font-size: 18px;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+    
+
+    /* Section Headings with Icons */
+    section h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    section h2 i {
+      color: #ffcc00;
+    }
+
+    .carousel {
+      display: flex;
+      overflow: hidden;
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .carousel-item {
+      flex: 0 0 auto;
+      width: 300px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .carousel-item:hover {
+      transform: scale(1.05);
+    }
+    .carousel-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .carousel-item-details {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .carousel-item-details div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .carousel-item-details i {
+      color: #ffcc00;
+    }
+/* Buttons */
+button {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  background: linear-gradient(135deg, #ffcc00, #ff0066);
+  color: white;
+  box-shadow: 0 4px 10px rgba(255, 0, 102, 0.3);
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 0, 102, 0.5);
+}
+    .why-broker-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .why-broker-item {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .about-us-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .team-member {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+    }
+    .team-member img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    /* Contact Us Form Section */
+    #contact-us-form {
+      padding: 40px 20px;
+      min-height: auto;
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      text-align: left;
+      max-width: 600px;
+      margin: auto;
+    }
+    .contact-form label {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+    /* Force placeholder text to white */
+    .contact-form input::placeholder,
+    .contact-form select::placeholder,
+    .contact-form textarea::placeholder {
+      color: white;
+    }
+    .
+    .contact-form button:active {
+      transform: scale(0.98);
+    }
+
+    /* QR Code Modal & Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      z-index: 999;
+    }
+    .qr-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      border-radius: 10px;
+      display: none;
+      z-index: 1000;
+      text-align: center;
+    }
+    /* Now showing a real QR code image */
+    .qr-modal img {
+      width: 200px;
+      height: 200px;
+      margin-bottom: 10px;
+    }
+    
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    footer .footer-left {
+      text-align: left;
+      flex: 1;
+    }
+    footer .footer-center {
+      text-align: center;
+      flex: 1;
+    }
+    footer .footer-right img {
+      width: 100px;
+      height: 100px;
+    }
+    footer p {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    /* Responsive Adjustments */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 32px;
+  }
+  .glassmorphism {
+    padding: 30px;
+  }
+  button {
+    padding: 10px 25px;
+    font-size: 16px;
+  }
+  input, textarea {
+    font-size: 14px;
+  }
+}
+
+  </style>
+</head>
+<body>
+ <header>
+  <div class="broker-text">
+    <i class="fas fa-key"></i>
+    <span>B</span><span>R</span><span>O</span><span>K</span><span>E</span><span>R</span>
+  </div>
+
+  <!-- Hamburger Menu Icon -->
+  <div class="menu-toggle" onclick="toggleMenu()">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <nav>
+    <ul id="nav-menu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#real-estate">Real Estate</a></li>
+      <li><a href="#cars">Cars</a></li>
+      <li><a href="#why-broker">Why BROKER?</a></li>
+      <li><a href="#about-us">About Us</a></li>
+      <li><a href="#contact-us-form">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <div class="header-right">
+    <div class="toggle-switch" onclick="toggleDarkMode()" id="darkModeToggle">
+      <i class="fas fa-sun sun-icon"></i>
+      <i class="fas fa-moon moon-icon"></i>
+    </div>
+    <button onclick="logout()">Logout</button>
+    <button onclick="showQRCode()">Get the App</button>
+  </div>
+</header>
+
+  <!-- QR Code Modal -->
+  <div class="overlay" id="overlay"></div>
+  <div class="qr-modal" id="qrModal">
+    <!-- Display a sample QR code image -->
+  <div> <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=BROKER" alt="QR Code" /></div> 
+    <button onclick="hideQRCode()">Close</button>
+  </div>
+
+  <!-- Home Section -->
+  <section id="home" class="home-section">
+    <div class="home-content glassmorphism">
+      <h1 class="broker-text">
+        <i class="fas fa-key"></i>
+        <span>B</span><span>R</span><span>O</span><span>K</span><span>E</span><span>R</span>
+      </h1>
+      <p>
+        Discover the ultimate marketplace for cars and properties.
+        Dive into our exclusive listings and find your dream home or ride today!
+      </p>
+      <button onclick="window.location.href='#real-estate'">Explore Listings</button>
+    </div>
+  </section>
+
+  <!-- Real Estate Section -->
+  <section id="real-estate">
+    <div class="glassmorphism">
+      <h2><i class="fas fa-building"></i> Real Estate</h2>
+      <div class="carousel" id="realEstateCarousel">
+        <!-- Real estate items will be loaded here via JS -->
+        <div class="carousel-item">
+          <img src="https://via.placeholder.com/300x200" alt="Property" />
+          <div class="carousel-item-details">
+            <div><i class="fas fa-home"></i> Villa in Dubai</div>
+            <div><i class="fas fa-map-marker-alt"></i> Dubai, UAE</div>
+            <div><i class="fas fa-dollar-sign"></i> $500,000</div>
+            <div><i class="fas fa-eye"></i> Viewers: 100</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cars Section -->
+  <section id="cars">
+    <div class="glassmorphism">
+      <h2><i class="fas fa-car"></i> Cars</h2>
+      <div class="carousel" id="carsCarousel">
+        <!-- Car items will be loaded here via JS -->
+        <div class="carousel-item">
+          <img src="https://via.placeholder.com/300x200" alt="Car" />
+          <div class="carousel-item-details">
+            <div><i class="fas fa-car"></i> Tesla Model S</div>
+            <div><i class="fas fa-map-marker-alt"></i> California, USA</div>
+            <div><i class="fas fa-dollar-sign"></i> $80,000</div>
+            <div><i class="fas fa-eye"></i> Viewers: 300</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why BROKER? Section -->
+  <section id="why-broker">
+    <div class="glassmorphism">
+      <h2><i class="fas fa-question-circle"></i> Why BROKER?</h2>
+      <div class="why-broker-section">
+        <div class="why-broker-item">
+          <h3>Fast & Easy</h3>
+          <p>
+            Our hassle-free app makes it faster and easier than ever to find the perfect car or property for you.
+          </p>
+        </div>
+        <div class="why-broker-item">
+          <h3>Modern Lifestyle</h3>
+          <p>
+            BROKER’s ease of use and user-friendly interface make it a convenient modern tool.
+          </p>
+        </div>
+        <div class="why-broker-item">
+          <h3>No Fake Ads</h3>
+          <p>
+            All ads in our application are reviewed and verified by the BROKER team.
+          </p>
+        </div>
+        <div class="why-broker-item">
+          <h3>Extended Market</h3>
+          <p>
+            We find the perfect car or property to meet your needs through our extensive market.
+          </p>
+        </div>
+         <div class="why-broker-item">
+          <h3>Ai POWER</h3>
+          <p>
+            You can use our power in ai 4 ai module could help you in a lot of things.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us Section -->
+  <section id="about-us">
+    <div class="glassmorphism">
+      <h2><i class="fas fa-users"></i> About Us</h2>
+      <div class="about-us-section">
+        <div class="team-member">
+          <img src="ah.jpg" alt="Team Member" />
+          <h3>Ahmad TA</h3>
+          <p>Expert in technology and software development.</p>
+                    <p>Back-End Developer</p>
+
+
+        </div>
+        <div class="team-member">
+          <img src="ba.jpg" alt="Team Member" />
+          <h3>Bashar AZ</h3>
+          <p>Expert in technology and AI development.</p>
+          <p>AI Engineer</p>
+          <p>Front-End Developer</p>
+        </div>
+        <div class="team-member">
+          <img src="es.jpg" alt="Team Member" />
+          <h3>Eyaiss SH</h3>
+           <p>AI Engineer</p>
+
+          <p>Skilled in digital marketing strategies.</p>
+        <p>Expert in technology and AI development.</p>
+
+
+
+        </div>
+        <div class="team-member">
+          <img src="tr.jpg" alt="Team Member" />
+          <h3>Tareq AL</h3>
+        <p>Expert in technology and AI development.</p>
+                                    <p>Back-End Developer</p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Us Section -->
+  <section id="contact-us-form">
+    <div class="glassmorphism">
+      <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+      <form class="contact-form">
+        <label for="category">Select Category</label>
+        <select id="category" name="category">
+          <option value="general">General Inquiry</option>
+          <option value="support">Support</option>
+          <option value="sales">Sales</option>
+        </select>
+        
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" placeholder="Subject" required />
+        
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
+        
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-left">
+      <div class="broker-text">
+        <i class="fas fa-key"></i>
+        <span>B</span><span>R</span><span>O</span><span>K</span><span>E</span><span>R</span>
+      </div>
+      <p>
+        BROKER is a Syria-based digital marketplace that aims to provide users with better car and property (buying, selling, and renting) experiences.
+      </p>
+    </div>
+               <h2> Get The App:</h2>
+
+    <div class="footer-right">
+
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=BROKER" alt="QR Code" />
+    </div>
+    <p style="text-align: center; width: 100%; margin-top: 20px;">
+      Copyright 2025 - BROKER
+    </p>
+  </footer>
+
+  <!-- Include FontAwesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script>
+    // Toggle Dark Mode and update the toggle switch
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      document.getElementById('darkModeToggle').classList.toggle('active');
+    }
+
+    // Logout function that removes the token from localStorage
+    function logout() {
+      localStorage.removeItem('authToken');
+                window.location.href = "login&regester.html";
+
+      alert('Logged out successfully!');
+    }
+
+    // Show and hide QR Code Modal
+    function showQRCode() {
+      document.getElementById('qrModal').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+    }
+    function hideQRCode() {
+      document.getElementById('qrModal').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+    }
+
+    // Carousel Animation (rotates items every 3 seconds)
+    function moveCarousel(carouselId, direction) {
+      const carousel = document.getElementById(carouselId);
+      const firstItem = carousel.firstElementChild;
+      if (direction === 'left') {
+        carousel.appendChild(firstItem);
+      } else {
+        carousel.insertBefore(carousel.lastElementChild, firstItem);
+      }
+    }
+    setInterval(() => moveCarousel('realEstateCarousel', 'left'), 3000);
+    setInterval(() => moveCarousel('carsCarousel', 'left'), 3000);
+
+    // --- API Integration ---
+
+    // Load Car Details from API and update the "Cars" carousel
+    async function loadCarDetails() {
+      const token = localStorage.getItem('authToken');
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/cardetail/index', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          const cars = await response.json();
+          const carsCarousel = document.getElementById('carsCarousel');
+          carsCarousel.innerHTML = ''; // Clear existing items
+          cars.forEach(car => {
+            // Assuming car.ad contains details and car.ad.image is an array of images
+            const ad = car.ad;
+            const images = ad.image || [];
+            const carouselItem = document.createElement('div');
+            carouselItem.classList.add('carousel-item');
+
+            const img = document.createElement('img');
+            // Use the first image if available; else, a placeholder
+            img.src = images.length ? images[0].image : 'https://via.placeholder.com/300x200';
+            carouselItem.appendChild(img);
+
+            const detailsDiv = document.createElement('div');
+            detailsDiv.classList.add('carousel-item-details');
+            detailsDiv.innerHTML = `
+              <div><i class="fas fa-car"></i> ${ad.title || 'Car Title'}</div>
+              <div><i class="fas fa-map-marker-alt"></i> ${ad.location || 'Location'}</div>
+              <div><i class="fas fa-dollar-sign"></i> ${ad.price || 'Price'}</div>
+              <div><i class="fas fa-eye"></i> Viewers: ${ad.views || 0}</div>
+            `;
+            carouselItem.appendChild(detailsDiv);
+            carsCarousel.appendChild(carouselItem);
+          });
+        } else {
+          console.error('Failed to load car details:', response.status);
+        }
+      } catch (error) {
+        console.error('Error fetching car details:', error);
+      }
+    }
+
+    // Load Real Estate Details from API and update the "Real Estate" carousel
+    async function loadRealEstateDetails() {
+      const token = localStorage.getItem('authToken');
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/propertydetail/index', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          const properties = await response.json();
+          const realEstateCarousel = document.getElementById('realEstateCarousel');
+          realEstateCarousel.innerHTML = ''; // Clear existing items
+          properties.forEach(property => {
+            // Assuming property.ad contains details and property.ad.image is an array of images
+            const ad = property.ad;
+            const images = ad.image || [];
+            const carouselItem = document.createElement('div');
+            carouselItem.classList.add('carousel-item');
+
+            const img = document.createElement('img');
+            img.src = images.length ? images[0].image : 'https://via.placeholder.com/300x200';
+            carouselItem.appendChild(img);
+
+            const detailsDiv = document.createElement('div');
+            detailsDiv.classList.add('carousel-item-details');
+            detailsDiv.innerHTML = `
+              <div><i class="fas fa-home"></i> ${ad.title || 'Property Title'}</div>
+              <div><i class="fas fa-map-marker-alt"></i> ${ad.location || 'Location'}</div>
+              <div><i class="fas fa-dollar-sign"></i> ${ad.price || 'Price'}</div>
+              <div><i class="fas fa-eye"></i> Viewers: ${ad.views || 0}</div>
+            `;
+            carouselItem.appendChild(detailsDiv);
+            realEstateCarousel.appendChild(carouselItem);
+          });
+        } else {
+          console.error('Failed to load property details:', response.status);
+        }
+      } catch (error) {
+        console.error('Error fetching property details:', error);
+      }
+    }
+
+    // Call the API integration functions after the DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      loadCarDetails();
+      loadRealEstateDetails();
+    });
+  </script>
+</body>
+</html>
